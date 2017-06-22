@@ -9,13 +9,15 @@ export default class GuessSection extends React.Component {
     super(props);
   }
 
-  guessEntered
-
+// collectGuess(n) {
+//     props.guestList(n);
+// }
+  
   render(){
     return (
         <section>
-            <h2 id="feedback">{props.feedback}</h2>
-            <GuessForm onClick={() => props.onClick()}/>
+            <h2 id="feedback">{this.props.feedback}</h2>
+            <GuessForm setGuess={this.props.guestList}/> 
         </section>
     );
   }

@@ -9,16 +9,21 @@ export default class Game extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      feedback: '',
+      feedback: 'PJ Game GO!',
       guessCount:0,
       guessNumbers:[]
     }
   }
 
-  increment(){
-    this.setState({guessCount: this.state.guessCount + 1});
-  }
+  // increment(){
+  //   this.setState({guessCount: this.state.guessCount + 1});
+  // }
   
+  setGuessList(num) {
+    this.setState({guessNumbers:[...this.state.guessNumbers, num]});
+  }
+
+
   //COME BACK TO THIS....//
   // setFeedback() {
   //   if(secretNumber == userGuess){
@@ -38,9 +43,9 @@ export default class Game extends React.Component {
     return (
         <div>
             <Header />
-            <GuessSection feedback="Make your guess!"  onChange={() => this.increment()}/>
+            <GuessSection guestList={num => this.setGuessList(num)} feedback={this.state.feedback} increment={() => this.setState({guessCount: this.state.guessCount + 1})} />
             <GuessCount count={this.state.guessCount} />
-            <GuessList guesses={[10, 15, 25]} />
+            <GuessList guesses={this.state.guessNumbers} />
         </div>
     );
   }
