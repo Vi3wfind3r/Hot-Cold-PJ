@@ -5,16 +5,18 @@ import GuessSection from './guess-section';
 import GuessCount  from './guess-count';
 import GuessList from './guess-list';
 
+const newGame = {
+    feedback: 'Make your Guess!',
+    guessCount:0,
+    guessNumbers:[],
+    secretNumber: Math.floor(Math.random()*100)+1,
+    instructions: false
+}
+
 export default class Game extends React.Component {
   constructor(props){
     super(props);
-    this.state={
-      feedback: 'Make your Guess!',
-      guessCount:0,
-      guessNumbers:[],
-      secretNumber: Math.floor(Math.random()*100)+1,
-      instructions: false
-    }
+    this.state=Object.assign({}, newGame);
   }
 
   showInstructions() {
@@ -35,7 +37,7 @@ export default class Game extends React.Component {
       if(num == el) {
         this.setState({
           guessNumbers:[...this.state.guessNumbers],
-          guessCount: this.state.guessCount 
+          guessCount: this.state.guessCount
         });
         alert('You cannot have duplicate numbers');
       }
@@ -68,12 +70,22 @@ export default class Game extends React.Component {
     }
   }
 
+  myTest() {
+    this.setState({
+      feedback: 'Make your Guess!',
+      guessCount:0,
+      guessNumbers:[],
+      secretNumber: Math.floor(Math.random()*100)+1,
+      instructions: false
+    });
+  }
+
   render(){
 
     return (
         <div>
-            <Header instructions={this.state.instructions} showInstructions={() => this.setState({instructions: true})} 
-              hideInstructions={() => this.setState({instructions: false})}/>
+            <Header instructions={this.state.instructions} showInstructions={() => this.setState({instructions: true})}
+              hideInstructions={() => this.setState({instructions: false})} myTest={this.myTest} />
             <GuessSection guestList={num => this.makeGuess(num)} feedback={this.state.feedback} />
             <GuessCount count={this.state.guessCount} />
             <GuessList guesses={this.state.guessNumbers} />
