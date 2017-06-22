@@ -85,7 +85,7 @@ export default class Game extends React.Component {
     return (
         <div>
             <Header instructions={this.state.instructions} showInstructions={() => this.setState({instructions: true})}
-              hideInstructions={() => this.setState({instructions: false})} myTest={this.myTest} />
+              hideInstructions={() => this.setState({instructions: false})} myTest={() => this.myTest()} />
             <GuessSection guestList={num => this.makeGuess(num)} feedback={this.state.feedback} />
             <GuessCount count={this.state.guessCount} />
             <GuessList guesses={this.state.guessNumbers} />
