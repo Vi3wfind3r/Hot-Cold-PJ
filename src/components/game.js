@@ -12,8 +12,13 @@ export default class Game extends React.Component {
       feedback: 'Make your Guess!',
       guessCount:0,
       guessNumbers:[],
-      secretNumber: Math.floor(Math.random()*100)+1
+      secretNumber: Math.floor(Math.random()*100)+1,
+      instructions: false
     }
+  }
+
+  showInstructions() {
+    this.setState({instructions: true});
   }
 
   makeGuess(num) {
@@ -67,7 +72,8 @@ export default class Game extends React.Component {
 
     return (
         <div>
-            <Header />
+            <Header instructions={this.state.instructions} showInstructions={() => this.setState({instructions: true})} 
+              hideInstructions={() => this.setState({instructions: false})}/>
             <GuessSection guestList={num => this.makeGuess(num)} feedback={this.state.feedback} />
             <GuessCount count={this.state.guessCount} />
             <GuessList guesses={this.state.guessNumbers} />
