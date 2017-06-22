@@ -9,54 +9,60 @@ export default class Game extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      feedback: 'PJ Game GO!',
+      feedback: 'Make your Guess!',
       guessCount:0,
-      guessNumbers:[]
+      guessNumbers:[],
+      secretNumber: Math.floor(Math.random()*100)+1
     }
   }
 
-  setGuessList(num) {
-    this.setState({guessNumbers:[...this.state.guessNumbers, num]
-    },
-    {
-     guessCount: this.state.guessCount++
+  makeGuess(num) {
+    this.setState({
+      guessNumbers:[...this.state.guessNumbers, num],
+      guessCount: this.state.guessCount+1
     });
+    this.setFeedback(num)
   }
 
-  // increment() {
-  //   this.setState({guessCount: 0 || this.state.guessNumbers.length});
-  // }
 
-
-
-  //COME BACK TO THIS....//
-  // setFeedback() {
-  //   if(secretNumber == userGuess){
-  //     feedback = 'You Won. Click new game to play again';
-  //   } else if(Math.abs(secretNumber - userGuess) < 10){
-  //     userFeedback = 'hot';
-  //   } else if(Math.abs(secretNumber - userGuess) < 20 && Math.abs(secretNumber - userGuess) > 9){
-  //     userFeedback = ' Kinda hot';
-  //   } else if(Math.abs(secretNumber - userGuess) < 30 && Math.abs(secretNumber - userGuess) > 19){
-  //     userFeedback = 'less than warm';
-  //   } else {
-  //     userFeedback = 'cold';
-  //   }
-  // }
+  setFeedback(num) {
+    let guessDiff = Math.abs(this.state.secretNumber - num);
+      console.log("diff",guessDiff);
+      console.log("sec",this.state.secretNumber);
+      console.log("num",num);
+      console.log(this.state.guessNumbers);
+    if(this.state.secretNumber == num){
+      this.setState({
+        feedback: 'You Won. Click new game to play again'
+      });
+    } else if(guessDiff < 10){
+      this.setState({
+        feedback: 'hot'
+      });
+    } else if(guessDiff < 20 && guessDiff > 9){
+      this.setState({
+        feedback: 'Kinda hot'
+      });
+    } else if(guessDiff < 30 && guessDiff > 19){
+      this.setState({
+        feedback: 'less than warm'
+      });
+    } else {
+      this.setState({
+        feedback: 'cold'
+      });
+    }
+  }
 
   render(){
+
     return (
         <div>
             <Header />
-            <GuessSection guestList={num => this.setGuessList(num)} feedback={this.state.feedback} />
+            <GuessSection guestList={num => this.makeGuess(num)} feedback={this.state.feedback} />
             <GuessCount count={this.state.guessCount} />
             <GuessList guesses={this.state.guessNumbers} />
         </div>
     );
   }
 }
-
-//hot
-//cold
-//kinda hot
-//less than warm
