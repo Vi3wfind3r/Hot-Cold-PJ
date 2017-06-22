@@ -19,18 +19,27 @@ export default class Game extends React.Component {
   makeGuess(num) {
     this.setState({
       guessNumbers:[...this.state.guessNumbers, num],
-      guessCount: this.state.guessCount+1
+      guessCount: this.state.guessCount + 1
     });
-    this.setFeedback(num)
+    this.noDuplicates(num);
+    this.setFeedback(num);
   }
 
+  noDuplicates(num) {
+    this.state.guessNumbers.forEach(el => {
+      if(num == el) {
+        this.setState({
+          guessNumbers:[...this.state.guessNumbers],
+          guessCount: this.state.guessCount 
+        });
+        alert('You cannot have duplicate numbers');
+      }
+    })
+  }
 
   setFeedback(num) {
     let guessDiff = Math.abs(this.state.secretNumber - num);
-      console.log("diff",guessDiff);
-      console.log("sec",this.state.secretNumber);
-      console.log("num",num);
-      console.log(this.state.guessNumbers);
+
     if(this.state.secretNumber == num){
       this.setState({
         feedback: 'You Won. Click new game to play again'
