@@ -15,13 +15,18 @@ export default class Game extends React.Component {
     }
   }
 
-  // increment(){
-  //   this.setState({guessCount: this.state.guessCount + 1});
-  // }
-  
   setGuessList(num) {
-    this.setState({guessNumbers:[...this.state.guessNumbers, num]});
+    this.setState({guessNumbers:[...this.state.guessNumbers, num]
+    },
+    {
+     guessCount: this.state.guessCount++
+    });
   }
+
+  // increment() {
+  //   this.setState({guessCount: 0 || this.state.guessNumbers.length});
+  // }
+
 
 
   //COME BACK TO THIS....//
@@ -43,7 +48,7 @@ export default class Game extends React.Component {
     return (
         <div>
             <Header />
-            <GuessSection guestList={num => this.setGuessList(num)} feedback={this.state.feedback} increment={() => this.setState({guessCount: this.state.guessCount + 1})} />
+            <GuessSection guestList={num => this.setGuessList(num)} feedback={this.state.feedback} />
             <GuessCount count={this.state.guessCount} />
             <GuessList guesses={this.state.guessNumbers} />
         </div>
