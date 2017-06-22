@@ -15,7 +15,7 @@ export default class GuessSection extends React.Component {
     return (
         <section>
             <h2 id="feedback">{props.feedback}</h2>
-            <GuessForm />
+            <GuessForm onClick={() => props.onClick()}/>
         </section>
     );
   }
