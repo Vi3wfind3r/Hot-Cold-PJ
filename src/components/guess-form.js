@@ -9,8 +9,8 @@ export default function GuessForm(props) {
             <input type="text" name="userGuess" id="userGuess"
                 className="text" maxLength="3" autoComplete="off"
                 placeholder="Enter your Guess" ref={input => textInput = input} required />
-            <input type="button" id="guessButton" className="button" name="submit"
-                onClick={() => props.setGuess(textInput.value)} value="Guess" />
+            <input type="button" id="guessButton" className="button" name="submit" value="Guess"
+                onClick={() => props.setGuess(textInput.value)} />
         </form>
     );
 };
