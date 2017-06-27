@@ -34,7 +34,7 @@ export default class Game extends React.Component {
 
   noDuplicates(num) {
     this.state.guessNumbers.forEach(el => {
-      if(num == el) {
+      if(num === el) {
         this.setState({
           guessNumbers:[...this.state.guessNumbers],
           guessCount: this.state.guessCount
@@ -47,7 +47,7 @@ export default class Game extends React.Component {
   setFeedback(num) {
     let guessDiff = Math.abs(this.state.secretNumber - num);
 
-    if(this.state.secretNumber == num){
+    if(this.state.secretNumber === num){
       this.setState({
         feedback: 'You Won. Click new game to play again'
       });
@@ -86,7 +86,7 @@ export default class Game extends React.Component {
         <div>
             <Header instructions={this.state.instructions} showInstructions={() => this.setState({instructions: true})}
               hideInstructions={() => this.setState({instructions: false})} myTest={() => this.myTest()} />
-            <GuessSection guestList={num => this.makeGuess(num)} feedback={this.state.feedback} />
+            <GuessSection onGuess={(num) => this.makeGuess(num)} feedback={this.state.feedback} />
             <GuessCount count={this.state.guessCount} />
             <GuessList guesses={this.state.guessNumbers} />
         </div>
